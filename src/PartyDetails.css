@@ -1,0 +1,254 @@
+.party-details-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: white;
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+  overflow-y: auto; /* allow vertical scroll if content overflows */
+  max-height: 90vh; /* max height to force scroll if overflow */
+}
+
+.party-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-row {
+  display: flex;
+  gap: 20px;
+}
+
+.input-row label {
+  flex: 1;
+}
+
+.party-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  color: #333;
+}
+
+.party-form input[type="text"],
+.party-form input[type="tel"],
+.party-form input[type="email"],
+.party-form select,
+.party-form textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1.8px solid #aaa;
+  font-size: 14px;
+  font-family: inherit;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+.party-form textarea {
+  height: 60px;
+}
+
+.upload-section {
+  margin-top: 20px;
+}
+
+.image-upload-wrapper {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.upload-box {
+  position: relative;
+  width: 180px;
+  padding: 10px;
+  background: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: inset 0 0 5px #ddd;
+  text-align: center;
+}
+
+.upload-box label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #0078d7;
+}
+
+.upload-box input[type="file"] {
+  display: none;
+}
+
+progress {
+  width: 100%;
+  height: 5px;
+  margin: 6px 0;
+}
+
+.preview-image {
+  margin-top: 8px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.upload-caution-text {
+  flex-grow: 1;
+  font-size: 13px;
+  color: #a00;
+  font-weight: 600;
+  margin-left: 20px;
+  align-self: flex-start;
+}
+
+.bank-details-limited {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin: 15px 0 10px 0;
+}
+
+.add-bank-btn {
+  background-color: #0078d7;
+  border: none;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 20px;
+  width: max-content;
+}
+
+.add-bank-btn:hover {
+  background-color: #005ea3;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+  margin-top: 25px;
+}
+
+.save-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.save-btn:hover {
+  background-color: #1e7e34;
+}
+
+.back-btn {
+  background-color: #6c757d;
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  background-color: #565e64;
+}
+
+/* Responsive adjustment for smaller widths */
+@media (max-width: 700px) {
+  .input-row {
+    flex-direction: column;
+  }
+}
+/* Preview box for passport size photo and signature */
+.preview-box {
+  width: 120px;
+  height: 150px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  background-color: #f9f9f9;
+  position: relative;
+}
+
+.placeholder-box {
+  text-align: center;
+  color: #999;
+  font-size: 14px;
+  padding: 10px;
+}
+
+.preview-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+/* Extend image-upload-wrapper to support preview boxes side by side */
+.image-upload-wrapper {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.save-btn,
+.save-submit-btn,
+.back-btn {
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.save-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.save-btn:hover {
+  background-color: #1e7e34;
+}
+
+.save-submit-btn {
+  background-color: #0078d7;
+  color: white;
+}
+
+.save-submit-btn:hover {
+  background-color: #005ea8;
+}
+
+.back-btn {
+  background-color: #6c757d;
+  color: white;
+}
+
+.back-btn:hover {
+  background-color: #565e64;
+}

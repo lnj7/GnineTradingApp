@@ -1,38 +1,171 @@
-.App {
-  text-align: center;
+.home-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #f0f2f5;
+  position: relative;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.hamburger-button {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1001;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  user-select: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px; /* Hidden by default */
+  width: 250px;
+  height: 100%;
   background-color: #282c34;
-  min-height: 100vh;
+  color: white;
+  transition: left 0.3s ease;
+  padding-top: 60px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.sidebar.open {
+  left: 0; /* Show sidebar */
+}
+
+.sidebar-menu-button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 16px;
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  transition: background-color 0.2s ease;
+}
+
+.sidebar-menu-button:hover {
+  background-color: #3f4a66;
+}
+
+.emoji {
+  margin-right: 12px;
+  font-size: 20px;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 80px 40px 40px 40px;
+  margin-left: 0;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar.open ~ .content {
+  margin-left: 250px; /* Push content right when sidebar open */
+}
+.breadcrumb {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #555;
+  user-select: none;
+}
+
+.breadcrumb-item {
+  font-weight: 500;
+}
+/* Sidebar main container */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px; /* Hidden by default */
+  width: 250px;
+  height: 100vh;
+  background-color: #282c34;
+  color: white;
+  padding-top: 60px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+  transition: left 0.3s ease;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.sidebar.open {
+  left: 0; /* Show sidebar */
+}
+
+/* Main menu buttons */
+.sidebar-menu-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 14px 24px;
+  font-size: 16px;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar-menu-button:hover {
+  background-color: #3f4a66;
+}
+
+/* Emoji in menu */
+.sidebar-menu-button .emoji {
+  margin-right: 12px;
+  font-size: 18px;
+}
+
+/* Arrow for submenu */
+.arrow {
+  font-size: 14px;
+  transition: transform 0.3s ease;
+  user-select: none;
+  color: #bbb;
+}
+
+.arrow.right {
+  transform: rotate(-90deg);
+}
+
+.arrow.down {
+  transform: rotate(0deg);
+}
+
+/* Submenu container */
+.sidebar-submenu {
+  background-color: #394056; /* Slightly lighter than main sidebar */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+/* Submenu buttons: same priority, lighter color */
+.sidebar-submenu-button {
+  padding: 13px 40px; /* Indent compared to main buttons */
+  font-size: 15px;
+  color: #bbb; /* Lighter grey for sub buttons */
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  user-select: none;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-submenu-button:hover {
+  background-color: #4a5473;
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

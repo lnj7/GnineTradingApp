@@ -1,0 +1,62 @@
+.bank-details-container {
+  max-width: 600px;
+  background: white;
+  border-radius: 8px;
+  padding: 20px 25px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  margin: 0 auto;
+}
+
+.bank-details-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.bank-details-form input {
+  margin-top: 6px;
+  padding: 10px 12px;
+  border: 1.8px solid #aaa;
+  border-radius: 6px;
+  font-size: 16px;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+.bank-details-form input:focus {
+  border-color: #0078d7;
+  outline: none;
+}
+
+.submit-button {
+  margin-top: 20px;
+  background-color: #0078d7;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.submit-button:hover {
+  background-color: #005ea3;
+}
+.edit-button {
+  margin-top: 20px;
+  background-color: #0078d7;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.edit-button:hover {
+  background-color: #005ea3;
+}
