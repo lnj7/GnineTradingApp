@@ -1,15 +1,29 @@
-import React, { useState } from 'react';
-import './App.css';
-import BankDetails from './BankDetails';
-import PartyDetails from './PartyDetails';
-import SizeClub from './SizeClub';
-import Category from './Category';
+import React, { useState } from "react";
+import "./App.css";
 
+// Components
+import Sidebar from "./components/Sidebar";
+import BankDetails from "./BankDetails";
+import PartyDetails from "./PartyDetails";
+import SizeClub from "./SizeClub";
+import DayBookCurrency from "./DayBookCurrency";
+import DayBookPurchase from "./DayBookPurchase";
+import DayBookSales from "./DayBookSales";
+import DayBookThirdParty from "./DayBookThirdParty";
+import DayBookBalance from "./DayBookBalance";
+
+// Category Pages
+import Category from "./Category";
+import SubCategory from "./SubCategory";
+import ThirdCategory from "./ThirdCategory";
+
+// Category CSS
+import "./styling/Category.css";
 
 function HomePage() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('Dashboard');
-  const [breadcrumb, setBreadcrumb] = useState(['Dashboard']);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [activeSection, setActiveSection] = useState("Dashboard");
+  const [breadcrumb, setBreadcrumb] = useState(["Dashboard"]);
   const [expandedMenu, setExpandedMenu] = useState(null);
 
   const menuOptions = [
@@ -17,14 +31,26 @@ function HomePage() {
     { name: "Bank details", emoji: "🏦" },
     { name: "Party details", emoji: "🎉" },
     { name: "Size club", emoji: "📏" },
-    { name: "Categories", emoji: "📂",
+    {
+      name: "Categories",
+      emoji: "📂",
       submenu: [
-         { name: "Category" },
-         { name: "Sub Category" },
-         { name: "Third Category" }
-      ]
-     },
-    { name: "Day book", emoji: "📔" },
+        { name: "Category" },
+        { name: "Sub - Category" },
+        { name: "Third - Category" },
+      ],
+    },
+    {
+      name: "Day book",
+      emoji: "📔",
+      submenu: [
+        { name: "Day book - Currency" },
+        { name: "Day book - Purchase" },
+        { name: "Day book - Sales" },
+        { name: "Day book - Third Party" },
+        { name: "Bal. as on (date)" },
+      ],
+    },
     { name: "Rough diary", emoji: "📓" },
     { name: "Stock management", emoji: "📦" },
     { name: "Stock out", emoji: "🚚" },
@@ -43,43 +69,57 @@ function HomePage() {
     { name: "Check tracker receipts", emoji: "📥" },
   ];
 
-  // Handler when a menu button is clicked
-  const handleMenuClick = (name, isSubmenu = false) => {
-  setActiveSection(name);
-  setBreadcrumb(['Home', name]);
+  const handleMenuClick = (name, isSubmenu = false, parent = null) => {
+    setActiveSection(name);
+    if (isSubmenu && parent) {
+      setBreadcrumb(["Home", parent, name]);
+    } else {
+      setBreadcrumb(["Home", name]);
+    }
+    setSidebarOpen(true);
   };
 
-  // Toggle submenu (Categories) expanded state with toggle behavior
-const toggleSubmenu = (name) => {
-  if (expandedMenu === name) {
-    setExpandedMenu(null);  // collapse if already opened
-  } else {
-    setExpandedMenu(name);  // open if closed or other submenu opened
-  }
-};
+  const toggleSubmenu = (name) => {
+    setExpandedMenu((prev) => (prev === name ? null : name));
+  };
 
-
-
-  // Render section content according to activeSection
   const renderContent = () => {
     switch (activeSection) {
-      case 'Bank details':
+      // Bank/Party/Size
+      case "Bank details":
         return <BankDetails />;
-      case 'Party details':
-        return <PartyDetails />; 
-      case 'Size club':
-        return <SizeClub />; 
-      case 'Category':
-        return <Category />;
-      case 'Sub Category':
-      case 'Third Category':
+      case "Party details":
+        return <PartyDetails />;
+      case "Size club":
+        return <SizeClub />;
+
+      // Category Pages
+      case "Category":
+        return <Category breadcrumb={breadcrumb} />;
+      case "Sub - Category":
+        return <SubCategory breadcrumb={breadcrumb} />;
+      case "Third - Category":
+        return <ThirdCategory breadcrumb={breadcrumb} />;
+
+      // Day Book Pages
+      case "Day book - Currency":
+        return <DayBookCurrency />;
+      case "Day book - Purchase":
+        return <DayBookPurchase />;
+      case "Day book - Sales":
+        return <DayBookSales />;
+      case "Day book - Third Party":
+        return <DayBookThirdParty />;
+      case "Bal. as on (date)":
+        return <DayBookBalance />;
+
       default:
-
-
         return (
           <div>
             <h2>{activeSection}</h2>
-            <p>This is the <strong>{activeSection}</strong> section content.</p>
+            <p>
+              This is the <strong>{activeSection}</strong> section content.
+            </p>
           </div>
         );
     }
@@ -87,7 +127,7 @@ const toggleSubmenu = (name) => {
 
   return (
     <div className="home-container">
-      {/* Hamburger button */}
+      {/* Hamburger */}
       <button
         className="hamburger-button"
         onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -96,60 +136,26 @@ const toggleSubmenu = (name) => {
         &#9776;
       </button>
 
-       {/* Sidebar menu */}
-      <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
-        <nav>
-          {menuOptions.map(({ name, emoji, submenu }, index) => {
-            const isExpanded = expandedMenu === name;
-            return (
-              <div key={index}>
-                <button
-                  className="sidebar-menu-button"
-                  onClick={() => {
-                    if (submenu) {
-                      toggleSubmenu(name);
-                      handleMenuClick(name, false);
-                    } else {
-                      handleMenuClick(name, false);
-                    }
-                  }}
-                >
-                  <span className="emoji">{emoji}</span> {name}
-                  {submenu && (
-                    <span className={`arrow ${isExpanded ? 'down' : 'right'}`}>▼</span>
-                  )}
-                </button>
+      {/* Sidebar */}
+      <Sidebar
+        sidebarOpen={sidebarOpen}
+        menuOptions={menuOptions}
+        expandedMenu={expandedMenu}
+        toggleSubmenu={toggleSubmenu}
+        handleMenuClick={handleMenuClick}
+      />
 
-                {submenu && isExpanded && (
-                  <div className="sidebar-submenu">
-                    {submenu.map((subItem, subIndex) => (
-                      <button
-                        key={subIndex}
-                        className="sidebar-submenu-button"
-                        onClick={() => handleMenuClick(subItem.name)}
-                      >
-                        {subItem.name}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </nav>
-      </aside>
-
+      {/* Main Content */}
       <main className="content">
-        {/* Breadcrumb / file location */}
+        {/* Breadcrumb */}
         <nav className="breadcrumb">
           {breadcrumb.map((crumb, index) => (
             <span key={index} className="breadcrumb-item">
-              {crumb} {index < breadcrumb.length - 1 && ' / '}
+              {crumb} {index < breadcrumb.length - 1 && " / "}
             </span>
           ))}
         </nav>
 
-        {/* Section content */}
         {renderContent()}
       </main>
     </div>
